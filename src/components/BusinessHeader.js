@@ -26,7 +26,7 @@ export default function BusinessHeader({
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.card, shadowColor: colors.text }]}>
+    <View style={{...styles.container,  backgroundColor: colors.card, shadowColor: colors.text }}>
       <TouchableOpacity onPress={pickImage} style={styles.logoContainer}>
         {logoUri ? (
           <Image source={{ uri: logoUri }} style={styles.logo} />

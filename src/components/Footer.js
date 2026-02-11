@@ -8,12 +8,12 @@ const Footer = ({ onPress, total=0 }) => {
     const { colors } = useTheme()
 
     return (
-        <View style={{ ...styles.container, backgroundColor: colors.card }}>
+        <View style={{ ...styles.container, backgroundColor: colors.card, borderColor: colors.border }}>
             <View style={{ ...styles.row }}>
                 <Text style={{ color: colors.text, fontSize: 18 }}>Total General:</Text>
                 <Text style={{ color: colors.primary, fontSize: 22, fontWeight: 'bold' }}>{formatCurrency(total, 'MXN')}</Text>
             </View>
-            <TouchableOpacity style={{...styles.exportButton, ...styles.row, justifyContent: 'center', backgroundColor: colors.secondary }} onPress={onPress}>
+            <TouchableOpacity style={{...styles.exportButton, ...styles.row, justifyContent: 'center', backgroundColor: colors.primary }} onPress={onPress}>
                 <MaterialIcons color={colors.card} size={20} name='upload' style={{marginRight: 6}}/>
                 <Text style={styles.exportButtonText}>Exportar Nota (Imagen)</Text>
             </TouchableOpacity>
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         paddingHorizontal: 15,
-        paddingVertical: 10
+        paddingVertical: 10,
+        borderTopWidth: 1,
     },
     row: {
         flexDirection: 'row',

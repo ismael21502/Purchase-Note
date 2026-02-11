@@ -14,7 +14,13 @@ import Footer from './components/Footer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const Main = () => {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState([{
+        id: Date.now().toString(),
+        product: 'Jordan 1',
+        size: '37',
+        quantity: parseFloat('6'),
+        price: parseFloat('1300'),
+    }]);
 
     const [businessName, setBusinessName] = useState('');
     const [businessDirection, setBusinessDirection] = useState('')

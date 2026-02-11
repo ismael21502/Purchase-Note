@@ -48,7 +48,7 @@ export default function ProductForm({ onAddItem }) {
             <View style={{ ...styles.row, justifyContent: 'space-between' }}>
                 <Text style={[styles.header, { color: colors.text }]}>Agregar Producto</Text>
                 <View style={[styles.calculated, { backgroundColor: colors.background, borderColor: colors.border }]}>
-                    <Text style={[styles.calculatedText, { color: colors.text }]}>
+                    <Text style={{...styles.calculatedText,  color: colors.text }}>
                         Total: {formatCurrency((parseFloat(quantity || 0) * parseFloat(price || 0)), 'MXN')}
                     </Text>
                 </View>
@@ -87,9 +87,9 @@ export default function ProductForm({ onAddItem }) {
                 />
             </View>
 
-            <TouchableOpacity style={[styles.button, { backgroundColor: colors.primary, borderColor: colors.primary }]} onPress={handleAdd}>
-                <MaterialIcons size={20} name={'add'} color={'#fff'} style={{ marginRight: 5 }} />
-                <Text style={[styles.buttonText, { color: '#fff' }]}>Agregar a la Nota</Text>
+            <TouchableOpacity style={[styles.button, { backgroundColor: '#0084ff1f', borderColor: colors.primary }]} onPress={handleAdd}>
+                <MaterialIcons size={20} name={'add-circle'} color={colors.primary} style={{ marginRight: 5 }} />
+                <Text style={{...styles.buttonText,  color: colors.primary }}>Agregar a la Nota</Text>
             </TouchableOpacity>
         </View>
     );
@@ -126,12 +126,14 @@ const styles = StyleSheet.create({
     calculated: {
         borderWidth: 1,
         borderRadius: 100000000,
-        padding: 5,
+        paddingVertical: 5,
+        paddingHorizontal: 7,
         justifyContent: 'center',
     },
     calculatedText: {
         fontWeight: 'bold',
         textAlign: 'center',
+        fontSize: 12,
     },
     button: {
         flexDirection: 'row',
