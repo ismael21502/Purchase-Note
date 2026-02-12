@@ -78,7 +78,6 @@ export default function BusinessHeader({
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 70,
     height: 70,
-    borderRadius: 35,
+    borderRadius: 10,
     resizeMode: 'cover',
   },
   placeholderLogo: {

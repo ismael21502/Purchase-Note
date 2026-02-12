@@ -15,7 +15,7 @@ const Footer = ({ onPress, total=0 }) => {
             </View>
             <TouchableOpacity style={{...styles.exportButton, ...styles.row, justifyContent: 'center', backgroundColor: colors.primary }} onPress={onPress}>
                 <MaterialIcons color={"#FFF"} size={20} name='upload' style={{marginRight: 6}}/>
-                <Text style={styles.exportButtonText}>Exportar Nota (Imagen)</Text>
+                <Text style={styles.exportButtonText}>Exportar Nota</Text>
             </TouchableOpacity>
         </View>
     )

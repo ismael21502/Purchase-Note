@@ -18,7 +18,7 @@ export default function ProductList({ items, onRemoveItem }) {
                     <View style={styles.listContainer}>
                         {items.map((item) => (
                             <View key={item.id}>
-                                {ProductCard({ item, colors })}
+                                {ProductCard({ item, colors, onRemoveItem })}
                             </View>
                         ))}
                     </View>
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
         // shadowOffset: { width: 0, height: 1 },
         // shadowOpacity: 0.1,
         // shadowRadius: 2,
-        marginBottom: 20, // Add margin to avoid being hidden by footer/export button if needed
     },
     header: {
         fontSize: 18,

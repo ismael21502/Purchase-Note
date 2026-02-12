@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import { formatCurrency } from '../utils/priceFormat';
+const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, businessPhone, logoUri, items, total, clientName, clientDirection, date, shippingCost }, ref) => {
+    const shippingCostValue = parseFloat(shippingCost) || 0;
 
-const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, businessPhone, logoUri, items, total, clientName, clientDirection, date }, ref) => {
     return (
         <View ref={ref} style={styles.container} collapsable={false}>
             {/* Header */}
@@ -24,7 +26,7 @@ const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, bus
             {/* Table Header */}
             <View style={[styles.row, styles.tableHeader]}>
                 <Text style={[styles.cell, styles.colQty, styles.headerText]}>Cant.</Text>
-                <Text style={[styles.cell, styles.colProduct, styles.headerText]}>Producto</Text>
+                <Text style={[styles.cell, styles.colProduct, styles.headerText]}>Modelo</Text>
                 <Text style={[styles.cell, styles.colSize, styles.headerText]}>Talla</Text>
                 <Text style={[styles.cell, styles.colPrice, styles.headerText]}>Precio</Text>
                 <Text style={[styles.cell, styles.colTotal, styles.headerText]}>Subtotal</Text>
@@ -36,18 +38,30 @@ const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, bus
                     <Text style={[styles.cell, styles.colQty]}>{item.quantity}</Text>
                     <Text style={[styles.cell, styles.colProduct]}>{item.product}</Text>
                     <Text style={[styles.cell, styles.colSize]}>{item.size || '-'}</Text>
-                    <Text style={[styles.cell, styles.colPrice]}>${item.price.toFixed(2)}</Text>
-                    <Text style={[styles.cell, styles.colTotal]}>${(item.quantity * item.price).toFixed(2)}</Text>
+                    <Text style={[styles.cell, styles.colPrice]}>{formatCurrency(item.price)}</Text>
+                    <Text style={[styles.cell, styles.colTotal]}>{formatCurrency(item.quantity * item.price)}</Text>
                 </View>
             ))}
 
-            {/* Empty rows filler if needed, or just total */}
+
+            {/* Shipping Cost Row - only show if > 0 */}
+            {shippingCostValue > 0 && (
+                <View style={[styles.row, styles.shippingRow]}>
+                    <Text style={[styles.cell, styles.colQty, styles.noBorder]}></Text>
+                    <Text style={[styles.cell, styles.colProduct, styles.noBorder]}></Text>
+                    <Text style={[styles.cell, styles.colSize, styles.noBorder]}></Text>
+                    <Text style={[styles.cell, styles.colPrice, styles.shippingLabel]}>Servicio de paquetería:</Text>
+                    <Text style={[styles.cell, styles.colTotal, styles.shippingValue]}>{formatCurrency(shippingCostValue, 'MXN')}</Text>
+                </View>
+            )}
+
+            {/* Total Row */}
             <View style={[styles.row, styles.totalRow]}>
                 <Text style={[styles.cell, styles.colQty, styles.noBorder]}></Text>
                 <Text style={[styles.cell, styles.colProduct, styles.noBorder]}></Text>
                 <Text style={[styles.cell, styles.colSize, styles.noBorder]}></Text>
                 <Text style={[styles.cell, styles.colPrice, styles.totalLabel]}>TOTAL:</Text>
-                <Text style={[styles.cell, styles.colTotal, styles.totalValue]}>${total.toFixed(2)}</Text>
+                <Text style={[styles.cell, styles.colTotal, styles.totalValue]}>{formatCurrency(total)}</Text>
             </View>
 
             <View style={styles.footer}>
@@ -161,6 +175,19 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#000',
         backgroundColor: '#f9f9f9',
+    },
+    shippingRow: {
+        borderBottomWidth: 0,
+        marginTop: 5,
+    },
+    shippingLabel: {
+        fontSize: 14,
+        textAlign: 'right',
+        fontStyle: 'italic',
+    },
+    shippingValue: {
+        fontSize: 14,
+        fontStyle: 'italic',
     },
     footer: {
         marginTop: 50,

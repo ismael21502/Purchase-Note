@@ -87,7 +87,7 @@ export default function ProductForm({ onAddItem }) {
                 />
             </View>
 
-            <TouchableOpacity style={[styles.button, { backgroundColor: '#0084ff1f', borderColor: colors.primary }]} onPress={handleAdd}>
+            <TouchableOpacity style={[styles.button, { backgroundColor: `${colors.primary}1A`, borderColor: colors.primary }]} onPress={handleAdd}>
                 <MaterialIcons size={20} name={'add-circle'} color={colors.primary} style={{ marginRight: 5 }} />
                 <Text style={{ ...styles.buttonText, color: colors.primary }}>Agregar a la Nota</Text>
             </TouchableOpacity>

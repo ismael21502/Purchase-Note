@@ -16,13 +16,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AdditionalInfo from './components/AdditionalInfo';
 
 const Main = () => {
-    const [items, setItems] = useState([{
-        id: Date.now().toString(),
-        product: 'Jordan 1',
-        size: '37',
-        quantity: parseFloat('6'),
-        price: parseFloat('1300'),
-    }]);
+    const [items, setItems] = useState([]);
 
     const [businessName, setBusinessName] = useState('');
     const [businessDirection, setBusinessDirection] = useState('')
@@ -126,7 +120,7 @@ const Main = () => {
         }
     };
 
-    const total = items.reduce((acc, item) => acc + (item.quantity * item.price), 0);
+    const total = items.reduce((acc, item) => acc + (item.quantity * item.price), 0) + Number(shippingCost);
     return (
         <View style={{ ...styles.container, backgroundColor: colors.background, marginBottom: insets.bottom, marginTop: insets.top }} >
             {/* <StatusBar style="auto" /> */}
@@ -165,11 +159,6 @@ const Main = () => {
                 <ProductForm onAddItem={handleAddItem} />
 
                 <ProductList items={items} onRemoveItem={handleRemoveItem} />
-
-                {/* <TouchableOpacity style={[styles.exportButton, { backgroundColor: colors.secondary }]} onPress={handleExport}>
-                    <Text style={styles.exportButtonText}>Exportar Nota (Imagen)</Text>
-                </TouchableOpacity> */}
-                <View style={styles.spacer} />
             </ScrollView>
             <Footer onPress={handleExport} total={total} />
 
@@ -184,6 +173,7 @@ const Main = () => {
                     clientName={clientName}
                     clientDirection={clientDirection}
                     date={date}
+                    shippingCost={shippingCost}
                     logoUri={logoUri}
                     items={items}
                     total={total}
@@ -206,7 +196,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         padding: 15,
-        paddingBottom: 50,
+        // paddingBottom: 50,
     },
     headerTitleContainer: {
         marginBottom: 20,
