@@ -1,17 +1,25 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const InvoiceTemplate = React.forwardRef(({ businessName, logoUri, items, total }, ref) => {
+const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, businessPhone, logoUri, items, total, clientName, clientDirection }, ref) => {
     return (
         <View ref={ref} style={styles.container} collapsable={false}>
             {/* Header */}
             <View style={styles.header}>
                 {logoUri && <Image source={{ uri: logoUri }} style={styles.logo} />}
-                <Text style={styles.businessName}>{businessName || 'Nombre del Negocio'}</Text>
+                <View style={styles.headerTextContainer}>
+                    <Text style={styles.businessName}>{businessName || 'Nombre del Negocio'}</Text>
+                    {businessDirection ? <Text style={styles.businessInfo}>{businessDirection}</Text> : null}
+                    {businessPhone ? <Text style={styles.businessInfo}>{businessPhone}</Text> : null}
+                </View>
             </View>
 
             <Text style={styles.title}>NOTA DE COMPRA</Text>
-            <Text style={styles.date}>Fecha: {new Date().toLocaleDateString()}</Text>
+            <View style={styles.clientInfoContainer}>
+                <Text style={styles.date}>Fecha: {new Date().toLocaleDateString()}</Text>
+                {clientName ? <Text style={styles.clientInfo}>Cliente: {clientName}</Text> : null}
+                {clientDirection ? <Text style={styles.clientInfo}>Dirección: {clientDirection}</Text> : null}
+            </View>
 
             {/* Table Header */}
             <View style={[styles.row, styles.tableHeader]}>
@@ -75,6 +83,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#000',
     },
+    headerTextContainer: {
+        flex: 1,
+    },
+    businessInfo: {
+        fontSize: 14,
+        color: '#555',
+        marginTop: 2,
+    },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
@@ -83,11 +99,19 @@ const styles = StyleSheet.create({
         color: '#333',
         textTransform: 'uppercase',
     },
-    date: {
-        textAlign: 'right',
+    clientInfoContainer: {
         marginBottom: 20,
+        alignItems: 'flex-end',
+    },
+    date: {
         fontSize: 16,
         color: '#555',
+        marginBottom: 2,
+    },
+    clientInfo: {
+        fontSize: 16,
+        color: '#000',
+        marginTop: 2,
     },
     row: {
         flexDirection: 'row',

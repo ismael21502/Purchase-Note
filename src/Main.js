@@ -84,7 +84,7 @@ const Main = () => {
 
     const total = items.reduce((acc, item) => acc + (item.quantity * item.price), 0);
     return (
-        <View style={{...styles.container,  backgroundColor: colors.background, marginBottom: insets.bottom, marginTop: insets.top}} >
+        <View style={{ ...styles.container, backgroundColor: colors.background, marginBottom: insets.bottom, marginTop: insets.top }} >
             {/* <StatusBar style="auto" /> */}
 
             <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentContainer}>
@@ -119,7 +119,7 @@ const Main = () => {
                 </TouchableOpacity> */}
                 <View style={styles.spacer} />
             </ScrollView>
-            <Footer onPress={handleExport} total={total}/>
+            <Footer onPress={handleExport} total={total} />
 
 
             {/* Hidden Invoice Template for Capture */}
@@ -127,6 +127,10 @@ const Main = () => {
                 <InvoiceTemplate
                     ref={invoiceRef}
                     businessName={businessName}
+                    businessDirection={businessDirection}
+                    businessPhone={businessPhone}
+                    clientName={clientName}
+                    clientDirection={clientDirection}
                     logoUri={logoUri}
                     items={items}
                     total={total}
@@ -159,7 +163,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
     },
-    
+
     spacer: {
         height: 50,
     },

@@ -45,10 +45,10 @@ export default function ProductForm({ onAddItem }) {
 
     return (
         <View style={[styles.container, { backgroundColor: colors.card, shadowColor: colors.text }]}>
-            <View style={{ ...styles.row, justifyContent: 'space-between' }}>
+            <View style={{ ...styles.row, justifyContent: 'space-between', marginBottom: 15 }}>
                 <Text style={[styles.header, { color: colors.text }]}>Agregar Producto</Text>
                 <View style={[styles.calculated, { backgroundColor: colors.background, borderColor: colors.border }]}>
-                    <Text style={{...styles.calculatedText,  color: colors.text }}>
+                    <Text style={{ ...styles.calculatedText, color: colors.text }}>
                         Total: {formatCurrency((parseFloat(quantity || 0) * parseFloat(price || 0)), 'MXN')}
                     </Text>
                 </View>
@@ -89,7 +89,7 @@ export default function ProductForm({ onAddItem }) {
 
             <TouchableOpacity style={[styles.button, { backgroundColor: '#0084ff1f', borderColor: colors.primary }]} onPress={handleAdd}>
                 <MaterialIcons size={20} name={'add-circle'} color={colors.primary} style={{ marginRight: 5 }} />
-                <Text style={{...styles.buttonText,  color: colors.primary }}>Agregar a la Nota</Text>
+                <Text style={{ ...styles.buttonText, color: colors.primary }}>Agregar a la Nota</Text>
             </TouchableOpacity>
         </View>
     );
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 15,
+        // marginBottom: 15, // Moved to container view for alignment
     },
     input: {
         flex: 1,
