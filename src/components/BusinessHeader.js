@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   placeholderLogo: {
     width: 70,
     height: 70,
-    borderRadius: 35,
+    borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,

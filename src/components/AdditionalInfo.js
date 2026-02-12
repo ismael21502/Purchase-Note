@@ -33,7 +33,7 @@ export default function AdditionalInfo({
                 }}
                     isNumeric={true}
                     iconName={'attach-money'}
-                    placeholder={'Servicio de paquetería'}
+                    placeholder={'Costo de paquetería (opcional)'}
                     value={shippingCost}
                     onChangeText={onCostChange}
                 />

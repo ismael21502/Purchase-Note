@@ -9,12 +9,12 @@ const Footer = ({ onPress, total=0 }) => {
 
     return (
         <View style={{ ...styles.container, backgroundColor: colors.card, borderColor: colors.border }}>
-            <View style={{ ...styles.row }}>
+            <View style={{ ...styles.row, marginBottom: 5 }}>
                 <Text style={{ color: colors.text, fontSize: 18 }}>Total General:</Text>
                 <Text style={{ color: colors.primary, fontSize: 22, fontWeight: 'bold' }}>{formatCurrency(total, 'MXN')}</Text>
             </View>
             <TouchableOpacity style={{...styles.exportButton, ...styles.row, justifyContent: 'center', backgroundColor: colors.primary }} onPress={onPress}>
-                <MaterialIcons color={colors.card} size={20} name='upload' style={{marginRight: 6}}/>
+                <MaterialIcons color={"#FFF"} size={20} name='upload' style={{marginRight: 6}}/>
                 <Text style={styles.exportButtonText}>Exportar Nota (Imagen)</Text>
             </TouchableOpacity>
         </View>

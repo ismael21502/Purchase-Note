@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, View, ScrollView, TouchableOpacity, Text, Alert, Platform } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import * as Sharing from 'expo-sharing';
 import { captureRef } from 'react-native-view-shot';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BusinessHeader from './components/BusinessHeader';
 import ProductForm from './components/ProductForm';
@@ -37,7 +38,46 @@ const Main = () => {
     const invoiceRef = useRef();
 
     const { colors } = useTheme();
-    const insets = useSafeAreaInsets()
+    const insets = useSafeAreaInsets();
+
+    // Load business data from AsyncStorage on mount
+    useEffect(() => {
+        const loadBusinessData = async () => {
+            try {
+                const savedBusinessName = await AsyncStorage.getItem('businessName');
+                const savedBusinessDirection = await AsyncStorage.getItem('businessDirection');
+                const savedBusinessPhone = await AsyncStorage.getItem('businessPhone');
+                const savedLogoUri = await AsyncStorage.getItem('logoUri');
+
+                if (savedBusinessName) setBusinessName(savedBusinessName);
+                if (savedBusinessDirection) setBusinessDirection(savedBusinessDirection);
+                if (savedBusinessPhone) setBusinessPhone(savedBusinessPhone);
+                if (savedLogoUri) setLogoUri(savedLogoUri);
+            } catch (error) {
+                console.error('Error loading business data:', error);
+            }
+        };
+        loadBusinessData();
+    }, []);
+
+    // Save business data to AsyncStorage whenever it changes
+    useEffect(() => {
+        const saveBusinessData = async () => {
+            try {
+                await AsyncStorage.setItem('businessName', businessName);
+                await AsyncStorage.setItem('businessDirection', businessDirection);
+                await AsyncStorage.setItem('businessPhone', businessPhone);
+                if (logoUri) {
+                    await AsyncStorage.setItem('logoUri', logoUri);
+                } else {
+                    await AsyncStorage.removeItem('logoUri');
+                }
+            } catch (error) {
+                console.error('Error saving business data:', error);
+            }
+        };
+        saveBusinessData();
+    }, [businessName, businessDirection, businessPhone, logoUri]);
     const handleAddItem = (newItem) => {
         setItems((prevItems) => [...prevItems, newItem]);
     };
