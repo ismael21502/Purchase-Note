@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, businessPhone, logoUri, items, total, clientName, clientDirection }, ref) => {
+const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, businessPhone, logoUri, items, total, clientName, clientDirection, date }, ref) => {
     return (
         <View ref={ref} style={styles.container} collapsable={false}>
             {/* Header */}
@@ -16,7 +16,7 @@ const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, bus
 
             <Text style={styles.title}>NOTA DE COMPRA</Text>
             <View style={styles.clientInfoContainer}>
-                <Text style={styles.date}>Fecha: {new Date().toLocaleDateString()}</Text>
+                <Text style={styles.date}>Fecha: {date ? new Date(date).toLocaleDateString() : new Date().toLocaleDateString()}</Text>
                 {clientName ? <Text style={styles.clientInfo}>Cliente: {clientName}</Text> : null}
                 {clientDirection ? <Text style={styles.clientInfo}>Dirección: {clientDirection}</Text> : null}
             </View>

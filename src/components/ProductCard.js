@@ -17,7 +17,7 @@ const ProductCard = ({ item, colors, onRemoveItem }) => {
             <View style={styles.info}>
                 <Text style={[styles.productName, { color: colors.text, fontWeight: 'bold' }]}>{item.product}</Text>
                 <View style={{...styles.row,}}>
-                    <Text style={{ ...styles.text, color: colors.subText }}>{item.size ? `${item.size}` : ''}</Text>
+                    <Text style={{ ...styles.text, color: colors.subText }}>Talla {item.size ? `${item.size}` : ''}</Text>
                     <Separator size={3} color={colors.subText}/>
                     <Text style={{ ...styles.text, color: colors.subText }}>{item.quantity} unidades</Text>
                     <Separator size={3} color={colors.subText} />

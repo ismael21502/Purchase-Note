@@ -12,6 +12,7 @@ import ClientForm from './components/ClientForm';
 import { useTheme } from './context/ThemeContext';
 import Footer from './components/Footer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import AdditionalInfo from './components/AdditionalInfo';
 
 const Main = () => {
     const [items, setItems] = useState([{
@@ -28,6 +29,9 @@ const Main = () => {
 
     const [clientName, setClientName] = useState('')
     const [clientDirection, setClientDirection] = useState('')
+
+    const [shippingCost, setShippingCost] = useState('')
+    const [date, setDate] = useState(new Date())
 
     const [logoUri, setLogoUri] = useState(null);
     const invoiceRef = useRef();
@@ -109,6 +113,14 @@ const Main = () => {
                     clientDirection={clientDirection}
                     onClientDirectionChange={setClientDirection}
                 />
+                <AdditionalInfo
+                    shippingCost={shippingCost}
+                    onCostChange={setShippingCost}
+                    clientDirection={clientDirection}
+                    onClientDirectionChange={setClientDirection}
+                    date={date}
+                    onDateChange={setDate}
+                />
 
                 <ProductForm onAddItem={handleAddItem} />
 
@@ -131,6 +143,7 @@ const Main = () => {
                     businessPhone={businessPhone}
                     clientName={clientName}
                     clientDirection={clientDirection}
+                    date={date}
                     logoUri={logoUri}
                     items={items}
                     total={total}
