@@ -113,7 +113,7 @@ const Main = () => {
                 });
             } else {
                 Alert.alert("Guardado", `La imagen se ha guardado en: ${uri}`);
-            }
+            } 
         } catch (error) {
             console.error("Error al exportar:", error);
             Alert.alert("Error", "No se pudo generar la imagen de la nota.");
@@ -161,7 +161,6 @@ const Main = () => {
                 <ProductList items={items} onRemoveItem={handleRemoveItem} />
             </ScrollView>
             <Footer onPress={handleExport} total={total} />
-
 
             {/* Hidden Invoice Template for Capture */}
             <View style={styles.hiddenContainer} pointerEvents="none">

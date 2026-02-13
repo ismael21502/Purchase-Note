@@ -54,7 +54,15 @@ const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, bus
                     <Text style={[styles.cell, styles.colTotal, styles.shippingValue]}>{formatCurrency(shippingCostValue, 'MXN')}</Text>
                 </View>
             )}
-
+            {items.length > 0 && (
+                <View style={[styles.row, styles.shippingRow]}>
+                    <Text style={[styles.cell, styles.colQty, styles.noBorder]}></Text>
+                    <Text style={[styles.cell, styles.colProduct, styles.noBorder]}></Text>
+                    <Text style={[styles.cell, styles.colSize, styles.noBorder]}></Text>
+                    <Text style={[styles.cell, styles.colPrice, styles.shippingLabel]}>Pares:</Text>
+                    <Text style={[styles.cell, styles.colTotal, styles.shippingValue]}>{items.reduce((acc, item) => acc + item.quantity, 0)}</Text>
+                </View>
+            )}
             {/* Total Row */}
             <View style={[styles.row, styles.totalRow]}>
                 <Text style={[styles.cell, styles.colQty, styles.noBorder]}></Text>
@@ -130,7 +138,7 @@ const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
+        borderBottomColor: '#eee',
     },
     tableHeader: {
         backgroundColor: '#f0f0f0',
@@ -159,7 +167,7 @@ const styles = StyleSheet.create({
 
     totalRow: {
         borderBottomWidth: 0,
-        marginTop: 10,
+        // marginTop: 10,
     },
     noBorder: {
         borderRightWidth: 0,
@@ -177,17 +185,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#f9f9f9',
     },
     shippingRow: {
+        // marginTop: 5,
         borderBottomWidth: 0,
-        marginTop: 5,
     },
     shippingLabel: {
         fontSize: 14,
         textAlign: 'right',
         fontStyle: 'italic',
+        borderBottomWidth: 1,
+        borderColor: '#eee'
     },
     shippingValue: {
         fontSize: 14,
         fontStyle: 'italic',
+        borderBottomWidth: 1,
+        borderColor: '#eee'
     },
     footer: {
         marginTop: 50,
