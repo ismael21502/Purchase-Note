@@ -25,8 +25,8 @@ const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, bus
 
             {/* Table Header */}
             <View style={[styles.row, styles.tableHeader]}>
-                <Text style={[styles.cell, styles.colQty, styles.headerText]}>Cant.</Text>
                 <Text style={[styles.cell, styles.colProduct, styles.headerText]}>Modelo</Text>
+                <Text style={[styles.cell, styles.colQty, styles.headerText]}>Cant.</Text>
                 <Text style={[styles.cell, styles.colSize, styles.headerText]}>Talla</Text>
                 <Text style={[styles.cell, styles.colPrice, styles.headerText]}>Precio</Text>
                 <Text style={[styles.cell, styles.colTotal, styles.headerText]}>Subtotal</Text>
@@ -35,8 +35,8 @@ const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, bus
             {/* Table Body */}
             {items.map((item, index) => (
                 <View key={index} style={styles.row}>
-                    <Text style={[styles.cell, styles.colQty]}>{item.quantity}</Text>
                     <Text style={[styles.cell, styles.colProduct]}>{item.product}</Text>
+                    <Text style={[styles.cell, styles.colQty]}>{item.quantity}</Text>
                     <Text style={[styles.cell, styles.colSize]}>{item.size || '-'}</Text>
                     <Text style={[styles.cell, styles.colPrice]}>{formatCurrency(item.price)}</Text>
                     <Text style={[styles.cell, styles.colTotal]}>{formatCurrency(item.quantity * item.price)}</Text>
@@ -47,28 +47,18 @@ const InvoiceTemplate = React.forwardRef(({ businessName, businessDirection, bus
             {/* Shipping Cost Row - only show if > 0 */}
             {shippingCostValue > 0 && (
                 <View style={[styles.row, styles.shippingRow]}>
-                    <Text style={[styles.cell, styles.colQty, styles.noBorder]}></Text>
                     <Text style={[styles.cell, styles.colProduct, styles.noBorder]}></Text>
+                    <Text style={[styles.cell, styles.colQty, styles.noBorder]}></Text>
                     <Text style={[styles.cell, styles.colSize, styles.noBorder]}></Text>
                     <Text style={[styles.cell, styles.colPrice, styles.shippingLabel]}>Servicio de paquetería:</Text>
                     <Text style={[styles.cell, styles.colTotal, styles.shippingValue]}>{formatCurrency(shippingCostValue, 'MXN')}</Text>
                 </View>
             )}
-            {items.length > 0 && (
-                <View style={[styles.row, styles.shippingRow]}>
-                    <Text style={[styles.cell, styles.colQty, styles.noBorder]}></Text>
-                    <Text style={[styles.cell, styles.colProduct, styles.noBorder]}></Text>
-                    <Text style={[styles.cell, styles.colSize, styles.noBorder]}></Text>
-                    <Text style={[styles.cell, styles.colPrice, styles.shippingLabel]}>Pares:</Text>
-                    <Text style={[styles.cell, styles.colTotal, styles.shippingValue]}>{items.reduce((acc, item) => acc + item.quantity, 0)}</Text>
-                </View>
-            )}
-            {/* Total Row */}
             <View style={[styles.row, styles.totalRow]}>
-                <Text style={[styles.cell, styles.colQty, styles.noBorder]}></Text>
-                <Text style={[styles.cell, styles.colProduct, styles.noBorder]}></Text>
-                <Text style={[styles.cell, styles.colSize, styles.noBorder]}></Text>
-                <Text style={[styles.cell, styles.colPrice, styles.totalLabel]}>TOTAL:</Text>
+                <Text style={[styles.cell, styles.colProduct, styles.totalValue]}>Total:</Text>
+                <Text style={[styles.cell, styles.colQty, styles.totalValue]}>{items.reduce((acc, item) => acc + item.quantity, 0)}</Text>
+                <Text style={[styles.cell, styles.colSize, styles.totalValue]}></Text>
+                <Text style={[styles.cell, styles.colPrice, styles.totalValue]}></Text>
                 <Text style={[styles.cell, styles.colTotal, styles.totalValue]}>{formatCurrency(total)}</Text>
             </View>
 

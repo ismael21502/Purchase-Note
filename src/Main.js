@@ -16,7 +16,29 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AdditionalInfo from './components/AdditionalInfo';
 
 const Main = () => {
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState([
+        // {
+        //     id: 'aaaa',
+        //     product: 'Jordan 1 rojo',
+        //     size: '36',
+        //     quantity: parseFloat('2'),
+        //     price: parseFloat('1300'),
+        // },
+        // {
+        //     id: 'as45a45',
+        //     product: 'Airforce 1',
+        //     size: '38',
+        //     quantity: parseFloat('4'),
+        //     price: parseFloat('1000'),
+        // },
+        // {
+        //     id: Date.now().toString(),
+        //     product: 'Jordan 1 azules',
+        //     size: '42',
+        //     quantity: parseFloat('1'),
+        //     price: parseFloat('1350'),
+        // }
+    ]);
 
     const [businessName, setBusinessName] = useState('');
     const [businessDirection, setBusinessDirection] = useState('')
@@ -113,7 +135,7 @@ const Main = () => {
                 });
             } else {
                 Alert.alert("Guardado", `La imagen se ha guardado en: ${uri}`);
-            } 
+            }
         } catch (error) {
             console.error("Error al exportar:", error);
             Alert.alert("Error", "No se pudo generar la imagen de la nota.");
