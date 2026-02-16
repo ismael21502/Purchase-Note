@@ -3,7 +3,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 
-const IconInput = ({ containerStyle, iconName = '', placeholder, value, onChangeText, fontSize = 16, isNumeric = false, editable = true }) => {
+const IconInput = ({ containerStyle, iconName = '', placeholder, value, onChangeText, fontSize = 16, isNumeric = false, editable = true, secureTextEntry = false }) => {
     const { colors } = useTheme();
     const [isFocused, setIsFocused] = useState(false)
     return (
@@ -12,6 +12,7 @@ const IconInput = ({ containerStyle, iconName = '', placeholder, value, onChange
             <TextInput
                 editable={editable}
                 keyboardType={isNumeric ? 'numeric' : 'default'}
+                secureTextEntry={secureTextEntry}
                 style={[styles.textInput, { fontSize: fontSize, color: colors.text }]}
                 placeholder={placeholder}
                 placeholderTextColor={colors.subText}

@@ -14,6 +14,7 @@ import { useTheme } from './context/ThemeContext';
 import Footer from './components/Footer';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AdditionalInfo from './components/AdditionalInfo';
+import ActivateAppModal from './components/ActivateAppModal';
 
 const Main = () => {
     const [items, setItems] = useState([
@@ -55,7 +56,10 @@ const Main = () => {
 
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
+    const [isAppActive, setIsAppActive] = useState(false);
+    const [showActivateModal, setShowActivateModal] = useState(true);
 
+    const activationKey = 'Petalo21502'
     // Load business data from AsyncStorage on mount
     useEffect(() => {
         const loadBusinessData = async () => {
@@ -64,11 +68,16 @@ const Main = () => {
                 const savedBusinessDirection = await AsyncStorage.getItem('businessDirection');
                 const savedBusinessPhone = await AsyncStorage.getItem('businessPhone');
                 const savedLogoUri = await AsyncStorage.getItem('logoUri');
+                const savedIsAppActive = await AsyncStorage.getItem('isAppActive');
 
                 if (savedBusinessName) setBusinessName(savedBusinessName);
                 if (savedBusinessDirection) setBusinessDirection(savedBusinessDirection);
                 if (savedBusinessPhone) setBusinessPhone(savedBusinessPhone);
                 if (savedLogoUri) setLogoUri(savedLogoUri);
+                if (savedIsAppActive === 'true') {
+                    setIsAppActive(true);
+                    setShowActivateModal(false);
+                }
             } catch (error) {
                 console.error('Error loading business data:', error);
             }
@@ -143,6 +152,20 @@ const Main = () => {
     };
 
     const total = items.reduce((acc, item) => acc + (item.quantity * item.price), 0) + Number(shippingCost);
+
+    const validatePassword = async (password) => {
+        if (password == activationKey) {
+            setShowActivateModal(false);
+            setIsAppActive(true);
+            try {
+                await AsyncStorage.setItem('isAppActive', 'true');
+            } catch (error) {
+                console.error('Error saving activation state:', error);
+            }
+        } else {
+            setShowActivateModal(true);
+        }
+    }
     return (
         <View style={{ ...styles.container, backgroundColor: colors.background, marginBottom: insets.bottom, marginTop: insets.top }} >
             {/* <StatusBar style="auto" /> */}
@@ -200,6 +223,14 @@ const Main = () => {
                     total={total}
                 />
             </View>
+
+            <ActivateAppModal
+                visible={showActivateModal}
+                onActivate={(password) => {
+                    console.log(showActivateModal)
+                    validatePassword(password)
+                }}
+            />
         </View>
     )
 }
